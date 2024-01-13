@@ -1,20 +1,29 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import DetailPage from './pages/DetailPage';
 import CreateNotePage from './pages/CreateNotePage';
 import ArchivePage from './pages/ArchivePage';
 import NotePage from './pages/NotePage';
 import NotFoundPage from './pages/NotFoundPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import { AuthProvider, RequireAuth } from './lib/AuthContext';
 
 function App() {
     return (
-        <Routes>
-            <Route path="" element={<Navigate to="/notes" />} />
-            <Route path="/notes" element={<NotePage />} />
-            <Route path="/create" element={<CreateNotePage />} />
-            <Route path="/notes/detail/:id" element={<DetailPage />} />
-            <Route path="/archive" element={<ArchivePage />} />
-            <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <AuthProvider>
+            <Routes>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route element={<RequireAuth />}>
+                    <Route path="/notes" element={<NotePage />} />
+                    <Route path="/create" element={<CreateNotePage />} />
+
+                    <Route path="/notes/detail/:id" element={<DetailPage />} />
+                    <Route path="/archive" element={<ArchivePage />} />
+                </Route>
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+        </AuthProvider>
     );
 }
 
