@@ -1,13 +1,13 @@
 const languages = {
     id: {
-        title: 'Catatan Personal',
+        title: 'Catatan Pribadi',
         sidebar: {
             create: 'Buat Catatan',
             notes: 'Daftar Catatan',
             archive: 'Arsip',
         },
         navbar: {
-            theme: 'Tema',
+            theme: 'Ubah Tema',
             translate: 'Terjemahkan',
             logout: 'Keluar',
         },
@@ -52,12 +52,12 @@ const languages = {
             archive: 'Archive',
         },
         navbar: {
-            theme: 'Theme',
+            theme: 'Change Theme',
             translate: 'Translate',
             logout: 'Logout',
         },
         searchBar: 'Search Notes...',
-        addButton: 'Add',
+        addButton: 'Create',
         pageNotFound: {
             title: 'Oops! 404',
             desc: 'Unfortunately, this page doesn`t exist.'

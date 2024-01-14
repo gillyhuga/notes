@@ -55,7 +55,7 @@ const NoteForm = ({ onSubmit }) => {
             </div>
             <button
                 type="submit"
-                className="btn btn-neutral btn-sm absolute top-4 right-0 mx-4"
+                className="btn btn-sm absolute top-4 right-0 mx-4"
             >
                 {translate('addButton')}
             </button>

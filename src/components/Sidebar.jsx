@@ -7,14 +7,11 @@ import { useLanguage } from '../lib/context/LanguageContext';
 const Sidebar = ({ children }) => {
     const { translate } = useLanguage();
     const { theme } = useTheme();
-
-    
     const sidebarItems = [
         { key: 'createNotes', path: '/create', label: translate('sidebar.create'), icon: <FaPlusSquare /> },
         { key: 'notes', path: '/notes', label: translate('sidebar.notes'), icon: <FaStickyNote /> },
         { key: 'archive', path: '/archive', label: translate('sidebar.archive'), icon: <FaArchive /> },
     ];
-
 
     return (
         <div className="drawer lg:drawer-open">
@@ -42,14 +39,6 @@ const Sidebar = ({ children }) => {
 };
 
 Sidebar.propTypes = {
-    sidebarItems: PropTypes.arrayOf(
-        PropTypes.shape({
-            key: PropTypes.string.isRequired,
-            path: PropTypes.string.isRequired,
-            label: PropTypes.string.isRequired,
-            icon: PropTypes.node,
-        })
-    ).isRequired,
     children: PropTypes.node,
 };
 
