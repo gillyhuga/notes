@@ -1,10 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { MdOutlineTranslate } from 'react-icons/md';
+import { MdOutlineTranslate, MdOutlineBrightness2, MdOutlineWbSunny } from 'react-icons/md';
 import { useAuth } from '../lib/context/AuthContext';
+import { useTheme } from '../lib/context/ThemeContext';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const { theme } = useTheme();
     const { user, logout } = useAuth();
+    const { toggleTheme } = useTheme();
 
     const handleLogout = () => {
         logout();
@@ -12,7 +15,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar bg-base-100">
+        <div className={`navbar ${theme === 'dark' ? 'bg-slate-800 text-white' : 'bg-white text-black'}`}>
             <div className="navbar-start">
                 <label htmlFor="my-drawer-2" className="btn btn-ghost btn-circle btn-primary drawer-button lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -25,8 +28,12 @@ const Navbar = () => {
                 <button className="btn btn-square hidden sm:flex">
                     <MdOutlineTranslate size={25} />
                 </button>
-                <button className="btn btn-square mx-4 hidden sm:flex">
-                    <MdOutlineTranslate size={25} />
+                <button className="btn btn-square mx-4 hidden sm:flex" onClick={toggleTheme}>
+                    {theme === 'dark' ? (
+                        <MdOutlineBrightness2 size={25} />
+                    ) : (
+                        <MdOutlineWbSunny size={25} />
+                    )}
                 </button>
                 {user ? (
                     <div className="dropdown dropdown-end">
@@ -35,14 +42,14 @@ const Navbar = () => {
                                 <span>A</span>
                             </div>
                         </div>
-                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+                        <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 shadow rounded-box w-52 mt-4 ${theme === 'dark' ? 'bg-slate-800' : 'bg-white '}`} >
                             <li className="sm:hidden">
                                 <a>
                                     Translate
                                 </a>
                             </li>
                             <li className="sm:hidden">
-                                <a>
+                                <a onClick={toggleTheme}>
                                     Theme
                                 </a>
                             </li>

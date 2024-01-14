@@ -4,10 +4,12 @@ import { register } from '../utils/network-data';
 import toast from 'react-hot-toast';
 import { useAuth } from '../lib/context/AuthContext';
 import  useInput  from '../lib/hooks/useInput';
+import { useTheme } from '../lib/context/ThemeContext';
 
 const RegisterPage = () => {
     const navigate = useNavigate();
     const { user } = useAuth();
+    const { theme } = useTheme();
     const [name, onNameChange] = useInput('');
     const [email, onEmailChange] = useInput('');
     const [password, onPasswordChange] = useInput('');
@@ -41,7 +43,7 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-base-200">
+        <div className={`flex items-center justify-center min-h-screen ${theme === 'dark' ? 'bg-slate-800' : 'bg-white'}`}>
             <div className="bg-base-100 p-4 rounded-xl shadow-2xl max-w-sm w-full">
                 <img
                     src="../public/vite.svg"

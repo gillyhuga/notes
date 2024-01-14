@@ -27,13 +27,13 @@ const NoteForm = ({ onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
             <div>
                 <input
                     type="text"
                     id="title"
                     name="title"
-                    className="text-lg sm:text-3xl font-bold !outline-none pb"
+                    className="text-lg sm:text-3xl font-bold !outline-none bg-transparent"
                     value={title}
                     onChange={setTitle}
                     placeholder="Rahasia"
@@ -44,7 +44,7 @@ const NoteForm = ({ onSubmit }) => {
                 <textarea
                     id="body"
                     name="body"
-                    className="!outline-none w-full pt-4"
+                    className="!outline-none w-full pt-4 bg-transparent"
                     value={body}
                     onChange={setBody}
                     ref={textareaRef}
