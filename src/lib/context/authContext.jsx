@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getUserLogged, getAccessToken } from '../../utils/network-data';
-import { Navigate, Outlet } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
@@ -53,20 +52,6 @@ export const AuthProvider = ({ children }) => {
 export const useAuth = () => {
     return useContext(AuthContext);
 };
-
-export function RequireAuth() {
-    const { user, loading } = useAuth();
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (!user) {
-        return <Navigate to="/login" replace />;
-    }
-
-    return <Outlet />;
-}
 
 AuthProvider.propTypes = {
     children: PropTypes.node.isRequired,

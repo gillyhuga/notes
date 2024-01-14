@@ -7,7 +7,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Layout from './components/Layout';
-import { AuthProvider, RequireAuth } from './lib/context/authContext';
+import { AuthProvider } from './lib/context/authContext';
 
 function App() {
     return (
@@ -15,14 +15,11 @@ function App() {
             <Routes>
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
-                <Route element={<RequireAuth />}>
-                    <Route element={<Layout />}>
-                        <Route path="/notes" element={<NotePage />} />
-                        <Route path="/create" element={<CreateNotePage />} />
-
-                        <Route path="/notes/detail/:id" element={<DetailPage />} />
-                        <Route path="/archive" element={<ArchivePage />} />
-                    </Route>
+                <Route element={<Layout />}>
+                    <Route path="/notes" element={<NotePage />} />
+                    <Route path="/create" element={<CreateNotePage />} />
+                    <Route path="/notes/detail/:id" element={<DetailPage />} />
+                    <Route path="/archive" element={<ArchivePage />} />
                 </Route>
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
