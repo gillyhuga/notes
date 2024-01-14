@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineTranslate } from 'react-icons/md';
-import { useAuth } from '../lib/context/authContext';
+import { useAuth } from '../lib/context/AuthContext';
 
 const Navbar = () => {
     const navigate = useNavigate();

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, getUserLogged } from '../utils/network-data';
 import toast from 'react-hot-toast';
-import { useAuth } from '../lib/context/authContext';
+import { useAuth } from '../lib/context/AuthContext';
 import useInput from '../lib/hooks/useInput';
 
 const LoginPage = () => {

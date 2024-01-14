@@ -2,7 +2,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import { Navigate, Outlet } from 'react-router-dom';
 import { FaPlusSquare, FaStickyNote, FaArchive } from 'react-icons/fa';
-import { useAuth } from '../lib/context/authContext';
+import { useAuth } from '../lib/context/AuthContext';
 import Loader from './Loader';
 
 const sidebarItems = [

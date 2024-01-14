@@ -7,7 +7,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Layout from './components/Layout';
-import { AuthProvider } from './lib/context/authContext';
+import { AuthProvider } from './lib/context/AuthContext';
 
 function App() {
     return (
