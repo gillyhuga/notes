@@ -1,18 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../utils/network-data';
 import toast from 'react-hot-toast';
-import { useAuth } from '../lib/AuthContext';
+import { useAuth } from '../lib/context/authContext';
+import  useInput  from '../lib/hooks/useInput';
 
 const RegisterPage = () => {
     const navigate = useNavigate();
     const { user } = useAuth();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-    });
+    const [name, onNameChange] = useInput('');
+    const [email, onEmailChange] = useInput('');
+    const [password, onPasswordChange] = useInput('');
+    const [confirmPassword, onConfirmPasswordChange] = useInput('');
 
     useEffect(() => {
         if (user) {
@@ -20,22 +19,19 @@ const RegisterPage = () => {
         }
     }, [user, navigate]);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
 
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        if (formData.password !== formData.confirmPassword) {
+        if (password !== confirmPassword) {
             alert('Passwords don\'t match');
             return;
         }
 
         const { error } = await register({
-            name: formData.name,
-            email: formData.email,
-            password: formData.password,
+            name,
+            email,
+            password,
         });
 
         if (!error) {
@@ -65,8 +61,8 @@ const RegisterPage = () => {
                             className="input input-bordered"
                             required
                             name="name"
-                            value={formData.name}
-                            onChange={handleChange}
+                            value={name}
+                            onChange={onNameChange}
                         />
                     </div>
                     <div className="form-control">
@@ -79,8 +75,8 @@ const RegisterPage = () => {
                             className="input input-bordered"
                             required
                             name="email"
-                            value={formData.email}
-                            onChange={handleChange}
+                            value={email}
+                            onChange={onEmailChange}
                         />
                     </div>
                     <div className="form-control">
@@ -93,8 +89,8 @@ const RegisterPage = () => {
                             className="input input-bordered"
                             required
                             name="password"
-                            value={formData.password}
-                            onChange={handleChange}
+                            value={password}
+                            onChange={onPasswordChange}
                         />
                     </div>
                     <div className="form-control">
@@ -107,8 +103,8 @@ const RegisterPage = () => {
                             className="input input-bordered"
                             required
                             name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
+                            value={confirmPassword}
+                            onChange={onConfirmPasswordChange}
                         />
                     </div>
                     <div className="form-control">

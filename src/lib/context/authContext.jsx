@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getUserLogged, getAccessToken } from '../utils/network-data';
+import { getUserLogged, getAccessToken } from '../../utils/network-data';
 import { Navigate, Outlet } from 'react-router-dom';
 import toast from 'react-hot-toast';
 

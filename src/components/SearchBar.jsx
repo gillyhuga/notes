@@ -1,20 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
+import useInput from '../lib/hooks/useInput';
 
-const SearchBar = ({ onSearch, initialSearchKey }) => {
-    const [searchKey, setSearchKey] = useState(initialSearchKey || '');
+const SearchBar = ({ onSearch }) => {
+    const [searchKey, handleSearchChange] = useInput('');
 
     useEffect(() => {
-        setSearchKey(initialSearchKey || '');
-        onSearch(initialSearchKey || '');
-    }, [initialSearchKey, onSearch]);
-
-    const handleSearchChange = (e) => {
-        const newSearchKey = e.target.value;
-        setSearchKey(newSearchKey);
-        onSearch(newSearchKey);
-    };
+        onSearch(searchKey);
+    }, [searchKey, onSearch]);
 
     return (
         <div className="mb-4 flex items-center">

@@ -5,10 +5,6 @@ import NoNotesMessage from './NoNotesMessage';
 const NoteList = ({ notes, onNoteArchive, onNoteUnarchive, onNoteDelete }) => {
     const notesColors = ['bg-red-200', 'bg-amber-200', 'bg-sky-200'];
 
-    const handleNoteDelete = (noteId) => {
-        onNoteDelete && onNoteDelete(noteId);
-    };
-
     return (
         <div className="grid gap-4 py-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {notes.length === 0 ? (
@@ -23,7 +19,7 @@ const NoteList = ({ notes, onNoteArchive, onNoteUnarchive, onNoteDelete }) => {
                         color={notesColors[index % notesColors.length]}
                         onNoteArchive={onNoteArchive}
                         onNoteUnarchive={onNoteUnarchive}
-                        onNoteDelete={handleNoteDelete}
+                        onNoteDelete={onNoteDelete}
                     />
                 ))
             )}

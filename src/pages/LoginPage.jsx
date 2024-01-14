@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, getUserLogged } from '../utils/network-data';
 import toast from 'react-hot-toast';
-import { useAuth } from '../lib/AuthContext';
+import { useAuth } from '../lib/context/authContext';
+import useInput from '../lib/hooks/useInput';
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const { user, signIn } = useAuth();
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [email, onEmailChange] = useInput('');
+    const [password, onPasswordChange] = useInput('');
 
     useEffect(() => {
         if (user) {
@@ -15,13 +17,9 @@ const LoginPage = () => {
         }
     }, [user, navigate]);
 
-    const handleInputChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
     const handleLogin = async (e) => {
         e.preventDefault();
-
+        const formData = { email, password };
         try {
             const { error, data } = await login(formData);
             if (!error) {
@@ -56,8 +54,8 @@ const LoginPage = () => {
                             placeholder="Email"
                             className="input input-bordered"
                             required
-                            value={formData.email}
-                            onChange={handleInputChange}
+                            value={email}
+                            onChange={onEmailChange}
                         />
                     </div>
                     <div className="form-control">
@@ -70,8 +68,8 @@ const LoginPage = () => {
                             placeholder="Password"
                             className="input input-bordered"
                             required
-                            value={formData.password}
-                            onChange={handleInputChange}
+                            value={password}
+                            onChange={onPasswordChange}
                         />
                     </div>
                     <div className="form-control">

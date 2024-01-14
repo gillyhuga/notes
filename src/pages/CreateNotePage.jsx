@@ -1,21 +1,33 @@
-import NoteForm from '../components/NoteForm';
-import Layout from '../components/Layout';
-import { addNote } from '../utils/local-data';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import NoteForm from '../components/NoteForm';
+import { addNote } from '../utils/network-data';
 
-const AddNotePage = () => {
+const CreateNotePage = () => {
     const navigate = useNavigate();
 
-    const handleAddNote = (newNote) => {
-        addNote(newNote);
-        navigate('/note');
+    const handleSubmit = async (notes) => {
+        try {
+            await toast.promise(
+                addNote({
+                    title: notes.title,
+                    body: notes.body,
+                }),
+                {
+                    loading: 'Creating...',
+                    success: 'Successfully Created!',
+                    error: 'Failed to create note',
+                }
+            );
+            navigate('/notes');
+        } catch (error) {
+            toast.error('Error creating note:', error);
+        }
     };
 
     return (
-        <Layout title="Create Notes">
-            <NoteForm note={{ title: '', body: '' }} isEditMode={false} onCreateNote={handleAddNote} />
-        </Layout>
+        <NoteForm onSubmit={handleSubmit} />
     );
 };
 
-export default AddNotePage;
+export default CreateNotePage;

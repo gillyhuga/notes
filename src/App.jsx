@@ -6,7 +6,8 @@ import NotePage from './pages/NotePage';
 import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import { AuthProvider, RequireAuth } from './lib/AuthContext';
+import Layout from './components/Layout';
+import { AuthProvider, RequireAuth } from './lib/context/authContext';
 
 function App() {
     return (
@@ -15,11 +16,13 @@ function App() {
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route element={<RequireAuth />}>
-                    <Route path="/notes" element={<NotePage />} />
-                    <Route path="/create" element={<CreateNotePage />} />
+                    <Route element={<Layout />}>
+                        <Route path="/notes" element={<NotePage />} />
+                        <Route path="/create" element={<CreateNotePage />} />
 
-                    <Route path="/notes/detail/:id" element={<DetailPage />} />
-                    <Route path="/archive" element={<ArchivePage />} />
+                        <Route path="/notes/detail/:id" element={<DetailPage />} />
+                        <Route path="/archive" element={<ArchivePage />} />
+                    </Route>
                 </Route>
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>

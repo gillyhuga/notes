@@ -1,22 +1,38 @@
 import { useParams } from 'react-router-dom';
-import NoteForm from '../components/NoteForm';
-import { getNote, editNote } from '../utils/local-data';
-import Layout from '../components/Layout';
+import { getNote } from '../utils/network-data';
+import { useState, useEffect } from 'react';
+import NoteDetail from '../components/NoteDetail';
+import Loader from '../components/Loader';
 
 const DetailPage = () => {
     const { id } = useParams();
-    const note = getNote(id);
+    const [note, setNote] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const handleUpdateNote = (updatedNote) => {
-        editNote(updatedNote);
-    };
-
-    const pageTitle = `${note.title} | Personal Notes`;
+    useEffect(() => {
+        const fetchNote = async () => {
+            try {
+                const fetchedNote = await getNote(id);
+                setNote(fetchedNote.data);
+            } catch (error) {
+                console.error('Error fetching note:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchNote();
+    }, [id]);
 
     return (
-        <Layout title={pageTitle}>
-            <NoteForm note={note} isEditMode onUpdateNote={handleUpdateNote} />
-        </Layout>
+        <div>
+            {loading ? (
+                <Loader />
+            ) : (
+                <>
+                    <NoteDetail note={note} />
+                </>
+            )}
+        </div>
     );
 };
 
