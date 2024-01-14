@@ -2,9 +2,11 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
 import useInput from '../lib/hooks/useInput';
+import { useLanguage } from '../lib/context/LanguageContext';
 
 const SearchBar = ({ onSearch }) => {
     const [searchKey, handleSearchChange] = useInput('');
+    const { translate } = useLanguage();
 
     useEffect(() => {
         onSearch(searchKey);
@@ -22,7 +24,7 @@ const SearchBar = ({ onSearch }) => {
                         className="peer h-full w-full outline-none text-sm bg-transparent pr-2 rounded-r-md"
                         type="text"
                         id="search"
-                        placeholder="Search notes..."
+                        placeholder= {translate('searchBar')}
                         value={searchKey}
                         onChange={handleSearchChange}
                     />

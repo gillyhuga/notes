@@ -4,11 +4,12 @@ import NoteList from '../components/NoteList';
 import { getActiveNotes, archiveNote, deleteNote } from '../utils/network-data';
 import SearchBar from '../components/SearchBar';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useLanguage } from '../lib/context/LanguageContext';
 
 const NotePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-
+    const { translate } = useLanguage();
     const [activeNotes, setActiveNotes] = useState([]);
     const [searchNotes, setSearchNotes] = useState([]);
     const [keyword, setKeyword] = useState('');
@@ -93,13 +94,13 @@ const NotePage = () => {
             <div className="flex space-x-4">
                 <SearchBar onSearch={handleSearch} initialSearchKey={keyword} />
             </div>
-            <h1 className="font-bold text-xl pt-2">My Notes</h1>
+            <h1 className="font-bold text-xl pt-2">{translate('pageNotes.title')}</h1>
             {loading ? (
                 <Loader />
             ) : (
                 <>
                     <p className="text-sm text-gray-500 mb-4">
-                        Showing {keyword ? searchNotes.length : activeNotes.length} active notes
+                        {translate('pageNotes.result')} {keyword ? searchNotes.length : activeNotes.length} {translate('pageNotes.desc')}
                     </p>
                     <NoteList
                         notes={keyword ? searchNotes : activeNotes}

@@ -7,27 +7,20 @@ import NotFoundPage from './pages/NotFoundPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Layout from './components/Layout';
-import { AuthProvider } from './lib/context/AuthContext';
-import { ThemeProvider } from './lib/context/ThemeContext';
 
 function App() {
     return (
-        <ThemeProvider>
-            <AuthProvider>
-                <Routes>
-                    <Route path="/" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                    <Route element={<Layout />}>
-                        <Route path="/notes" element={<NotePage />} />
-                        <Route path="/create" element={<CreateNotePage />} />
-                        <Route path="/notes/detail/:id" element={<DetailPage />} />
-                        <Route path="/archive" element={<ArchivePage />} />
-                    </Route>
-                    <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-            </AuthProvider>
-        </ThemeProvider>
-
+        <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route element={<Layout />}>
+                <Route path="/notes" element={<NotePage />} />
+                <Route path="/create" element={<CreateNotePage />} />
+                <Route path="/notes/detail/:id" element={<DetailPage />} />
+                <Route path="/archive" element={<ArchivePage />} />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
+        </Routes>
     );
 }
 

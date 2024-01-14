@@ -1,9 +1,21 @@
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../lib/context/ThemeContext';
+import { FaPlusSquare, FaStickyNote, FaArchive } from 'react-icons/fa';
+import { useLanguage } from '../lib/context/LanguageContext';
 
-const Sidebar = ({ sidebarItems, children }) => {
+const Sidebar = ({ children }) => {
+    const { translate } = useLanguage();
     const { theme } = useTheme();
+
+    
+    const sidebarItems = [
+        { key: 'createNotes', path: '/create', label: translate('sidebar.create'), icon: <FaPlusSquare /> },
+        { key: 'notes', path: '/notes', label: translate('sidebar.notes'), icon: <FaStickyNote /> },
+        { key: 'archive', path: '/archive', label: translate('sidebar.archive'), icon: <FaArchive /> },
+    ];
+
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

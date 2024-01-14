@@ -4,15 +4,16 @@ import NoteList from '../components/NoteList';
 import { getArchivedNotes, unarchiveNote, deleteNote } from '../utils/network-data';
 import SearchBar from '../components/SearchBar';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useLanguage } from '../lib/context/LanguageContext';
 
 const ArchivePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-
+    const { translate } = useLanguage();
     const [archivedNotes, setArchivedNotes] = useState([]);
     const [searchNotes, setSearchNotes] = useState([]);
     const [keyword, setKeyword] = useState('');
-    const [loading, setLoading] = useState(true); // Add loading state
+    const [loading, setLoading] = useState(true);
 
     const handleSearch = useCallback(async (searchKeyword) => {
         setKeyword(searchKeyword);
@@ -70,7 +71,7 @@ const ArchivePage = () => {
         setLoading(true);
         try {
             await unarchiveNote(noteId);
-            await loadData(); // Reload the archived notes after unarchiving
+            await loadData();
         } finally {
             setLoading(false);
         }
@@ -80,7 +81,7 @@ const ArchivePage = () => {
         setLoading(true);
         try {
             await deleteNote(noteId);
-            await loadData(); // Reload the archived notes after deleting
+            await loadData();
         } finally {
             setLoading(false);
         }
@@ -91,12 +92,14 @@ const ArchivePage = () => {
             <div className="flex space-x-4">
                 <SearchBar onSearch={handleSearch} initialSearchKey={keyword} />
             </div>
-            <h1 className="font-bold text-xl pt-2">Archived Notes</h1>
+            <h1 className="font-bold text-xl pt-2">{translate('pageArchive.title')}</h1>
             {loading ? (
                 <Loader />
             ) : (
                 <>
-                    <p className="text-sm text-gray-500 mb-4"> Showing {keyword ? searchNotes.length : archivedNotes.length} archived notes</p>
+                    <p className="text-sm text-gray-500 mb-4">
+                        {translate('pageArchive.result')} {keyword ? searchNotes.length : archivedNotes.length} {translate('pageArchive.desc')}
+                    </p>
                     <NoteList
                         notes={keyword ? searchNotes : archivedNotes}
                         onNoteUnarchive={handleNoteUnarchive}

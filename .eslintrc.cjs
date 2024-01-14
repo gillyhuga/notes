@@ -16,5 +16,6 @@ module.exports = {
     'indent': ['error', 4],
     'semi': ['error', 'always'],
     'react-hooks/exhaustive-deps': 'off',
+    "no-inline-comments": "error",
   },
 };

@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../utils/network-data';
 import toast from 'react-hot-toast';
 import { useAuth } from '../lib/context/AuthContext';
-import  useInput  from '../lib/hooks/useInput';
+import useInput from '../lib/hooks/useInput';
 import { useTheme } from '../lib/context/ThemeContext';
+import { useLanguage } from '../lib/context/LanguageContext';
 
 const RegisterPage = () => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const RegisterPage = () => {
     const [email, onEmailChange] = useInput('');
     const [password, onPasswordChange] = useInput('');
     const [confirmPassword, onConfirmPasswordChange] = useInput('');
+    const { translate } = useLanguage();
 
     useEffect(() => {
         if (user) {
@@ -51,15 +53,15 @@ const RegisterPage = () => {
                     className="mx-auto mb-4"
                     style={{ width: '60px', height: 'auto' }}
                 />
-                <h1 className="text-2xl font-light mb-4 text-center">Personal Notes</h1>
+                <h1 className="text-2xl font-light mb-4 text-center">{translate('title')}</h1>
                 <form className="space-y-4" onSubmit={handleRegister}>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Name</span>
+                            <span className="label-text">{translate('pageRegister.name')}</span>
                         </label>
                         <input
                             type="text"
-                            placeholder="Name"
+                            placeholder={translate('pageRegister.name')}
                             className="input input-bordered"
                             required
                             name="name"
@@ -69,11 +71,11 @@ const RegisterPage = () => {
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Email</span>
+                            <span className="label-text">{translate('pageRegister.email')}</span>
                         </label>
                         <input
                             type="email"
-                            placeholder="Email"
+                            placeholder={translate('pageRegister.email')}
                             className="input input-bordered"
                             required
                             name="email"
@@ -83,11 +85,11 @@ const RegisterPage = () => {
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Password</span>
+                            <span className="label-text">{translate('pageRegister.password')}</span>
                         </label>
                         <input
                             type="password"
-                            placeholder="Password"
+                            placeholder={translate('pageRegister.password')}
                             className="input input-bordered"
                             required
                             name="password"
@@ -97,11 +99,11 @@ const RegisterPage = () => {
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Confirm Password</span>
+                            <span className="label-text">{translate('pageRegister.confirmPassword')}</span>
                         </label>
                         <input
                             type="password"
-                            placeholder="Confirm Password"
+                            placeholder={translate('pageRegister.confirmPassword')}
                             className="input input-bordered"
                             required
                             name="confirmPassword"
@@ -111,12 +113,12 @@ const RegisterPage = () => {
                     </div>
                     <div className="form-control">
                         <button type="submit" className="btn btn-primary w-full">
-                            Register
+                            {translate('pageRegister.register')}
                         </button>
                     </div>
                 </form>
                 <h1 className="font-light mt-5 text-center">
-                    Sudah punya akun? <a href="/" className="text-blue-500">Login di sini</a>
+                    {translate('pageRegister.loginDesc')} <Link to="/" className="text-blue-500">{translate('pageRegister.loginLink')}</Link>
                 </h1>
             </div>
         </div>

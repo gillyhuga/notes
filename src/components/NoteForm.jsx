@@ -2,11 +2,13 @@ import {  useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { formatCreatedAt } from '../utils/date-format';
 import useInput from '../lib/hooks/useInput';
+import { useLanguage } from '../lib/context/LanguageContext';
 
 const NoteForm = ({ onSubmit }) => {
     const [title, setTitle] = useInput('');
     const [body, setBody] = useInput('');
     const textareaRef = useRef(null);
+    const { translate } = useLanguage();
 
     useEffect(() => {
         handleTextareaResize();
@@ -55,7 +57,7 @@ const NoteForm = ({ onSubmit }) => {
                 type="submit"
                 className="btn btn-neutral btn-sm absolute top-4 right-0 mx-4"
             >
-                Add
+                {translate('addButton')}
             </button>
         </form>
     );
