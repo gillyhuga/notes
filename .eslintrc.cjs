@@ -15,5 +15,6 @@ module.exports = {
     'quotes': ['error', 'single'],
     'indent': ['error', 4],
     'semi': ['error', 'always'],
+    'react-hooks/exhaustive-deps': 'off',
   },
 };
