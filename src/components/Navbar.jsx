@@ -8,6 +8,7 @@ import {
 import { useAuth } from '../lib/context/AuthContext';
 import { useTheme } from '../lib/context/ThemeContext';
 import { useLanguage } from '../lib/context/LanguageContext';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Navbar = () => {
     const handleLogout = () => {
         logout();
         navigate('/');
+        toast.success('Logout Success');
     };
 
     return (

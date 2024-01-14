@@ -3,25 +3,33 @@ import { getNote } from '../utils/network-data';
 import { useState, useEffect } from 'react';
 import NoteDetail from '../components/NoteDetail';
 import Loader from '../components/Loader';
+import { useNavigate } from 'react-router-dom';
 
 const DetailPage = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [note, setNote] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchNote = async () => {
-            try {
-                const fetchedNote = await getNote(id);
-                setNote(fetchedNote.data);
-            } catch (error) {
-                console.error('Error fetching note:', error);
-            } finally {
-                setLoading(false);
-            }
+        const fetchNote = () => {
+            getNote(id)
+                .then(({ error, data }) => {
+                    if (!error) {
+                        setNote(data);
+                    } else {
+                        navigate('/notes');
+                    }
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
         };
         fetchNote();
     }, [id]);
+
+
+
 
     return (
         <div>

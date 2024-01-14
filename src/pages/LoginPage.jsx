@@ -24,16 +24,13 @@ const LoginPage = () => {
     }, [user, navigate]);
 
     const handleLogin = async (formData) => {
-        try {
-            const { error, data } = await login(formData);
-            if (!error) {
-                localStorage.setItem('accessToken', data.accessToken);
-                const { data: dataUser } = await getUserLogged();
-                signIn(dataUser);
-                navigate('/notes');
-            }
-        } catch (error) {
-            toast.error('Error during login:', error);
+        const { error, data } = await login(formData);
+        if (!error) {
+            localStorage.setItem('accessToken', data.accessToken);
+            const { data: dataUser } = await getUserLogged();
+            signIn(dataUser);
+            navigate('/notes');
+            toast.success('Login Success');
         }
     };
 

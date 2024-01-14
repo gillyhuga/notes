@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import { formatCreatedAt } from '../utils/date-format';
 
 const NoteDetail = ({ note }) => {
-    const formattedCreatedAt = formatCreatedAt(note.createdAt);
+    const formattedCreatedAt = formatCreatedAt(note?.createdAt);
 
     return (
         <div>
-            <h2 className="text-2xl font-bold mb-2">{note.title}</h2>
+            <h2 className="text-2xl font-bold mb-2">{note?.title}</h2>
             <p className="text-sm text-gray-500 mb-2">{formattedCreatedAt}</p>
-            <p>{note.body}</p>
+            <p>{note?.body}</p>
         </div>
     );
 };
@@ -16,9 +16,9 @@ const NoteDetail = ({ note }) => {
 NoteDetail.propTypes = {
     note: PropTypes.shape({
         id: PropTypes.string,
-        title: PropTypes.string.isRequired,
+        title: PropTypes.string,
         createdAt: PropTypes.string,
-        body: PropTypes.string.isRequired,
+        body: PropTypes.string,
     }),
 };
 

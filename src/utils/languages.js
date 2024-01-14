@@ -13,6 +13,7 @@ const languages = {
         },
         searchBar: 'Cari Catatan...',
         addButton: 'Tambah',
+        noNotesMessage: 'Belum ada catatan',
         pageNotFound: {
             title: 'Oops! 404',
             desc: 'Maaf, halaman tidak ditemukan.'
@@ -58,6 +59,7 @@ const languages = {
         },
         searchBar: 'Search Notes...',
         addButton: 'Create',
+        noNotesMessage: 'Notes not available',
         pageNotFound: {
             title: 'Oops! 404',
             desc: 'Unfortunately, this page doesn`t exist.'
