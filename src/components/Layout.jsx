@@ -18,7 +18,7 @@ const Layout = () => {
     }
 
     return (
-        <div className={`h-screen ${theme === 'dark' ? 'bg-slate-800 text-white' : 'bg-white text-black'}`}>
+        <div className={`min-h-screen ${theme === 'dark' ? 'bg-slate-800 text-white' : 'bg-white text-black'}`}>
             <Navbar />
             <Sidebar>
                 <Outlet />

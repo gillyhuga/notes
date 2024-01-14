@@ -36,24 +36,18 @@ const NotePage = () => {
             const data = await getActiveNotes();
             setActiveNotes(data.data);
             setSearchNotes(data.data);
-        } catch (error) {
-            console.error('Error fetching active notes:', error);
         } finally {
             setLoading(false);
         }
     };
 
     const loadNotesFromURL = async () => {
-        try {
-            const searchParams = new URLSearchParams(location.search);
-            const keywordParam = searchParams.get('keyword');
+        const searchParams = new URLSearchParams(location.search);
+        const keywordParam = searchParams.get('keyword');
 
-            if (keywordParam) {
-                setKeyword(keywordParam);
-                await handleSearch(keywordParam);
-            }
-        } catch (error) {
-            console.error('Error loading notes from URL:', error);
+        if (keywordParam) {
+            setKeyword(keywordParam);
+            await handleSearch(keywordParam);
         }
     };
 

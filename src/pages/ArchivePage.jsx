@@ -35,24 +35,18 @@ const ArchivePage = () => {
         try {
             const notes = await getArchivedNotes();
             setArchivedNotes(notes.data);
-        } catch (error) {
-            console.error('Error fetching archived notes:', error);
         } finally {
             setLoading(false);
         }
     };
 
     const loadNotesFromURL = async () => {
-        try {
-            const searchParams = new URLSearchParams(location.search);
-            const keywordParam = searchParams.get('keyword');
+        const searchParams = new URLSearchParams(location.search);
+        const keywordParam = searchParams.get('keyword');
 
-            if (keywordParam) {
-                setKeyword(keywordParam);
-                await handleSearch(keywordParam);
-            }
-        } catch (error) {
-            console.error('Error loading archived notes from URL:', error);
+        if (keywordParam) {
+            setKeyword(keywordParam);
+            await handleSearch(keywordParam);
         }
     };
 
