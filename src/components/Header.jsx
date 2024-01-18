@@ -4,7 +4,7 @@ const Header = ({ title }) => {
     return (
         <div className="text-center mb-4">
             <img
-                src="../public/website-icon.png"
+                src="/website-icon.png"
                 alt="Personal Notes Logo"
                 className="mx-auto mb-4"
                 style={{ width: '60px', height: 'auto' }}

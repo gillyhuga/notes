@@ -36,7 +36,6 @@ const SearchBar = ({ onSearch }) => {
 
 SearchBar.propTypes = {
     onSearch: PropTypes.func.isRequired,
-    initialSearchKey: PropTypes.string,
 };
 
 export default SearchBar;
